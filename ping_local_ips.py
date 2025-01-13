@@ -1,4 +1,4 @@
-#Router export: Troubleshooting > Open in Broser
+#Router export: Troubleshooting > Open in Browser
 #import into Excel:  ="{""IP"":"""&C1&""",""name"":"""&A1&"""},"
 
 import subprocess
@@ -8,9 +8,7 @@ import my_secrets
 
 def ping_ips(ip_addresses):
     for ip in ip_addresses:
-       # print(f"Pinging {ip['IP']}: {ip['name']}  ...")
         try:
-            # Use `subprocess.run` to execute the ping command
             result = subprocess.run(
                 ["ping", "-n", "1", ip['IP']],  # Use "-n" for Windows, "-c" for Unix-based systems
                 stdout=subprocess.PIPE, 
@@ -24,7 +22,6 @@ def ping_ips(ip_addresses):
         except Exception as e:
             print(f"Error pinging {ip['ip']}: {ip['name']}: {e}\n")
 
-# Example list of IP addresses
 ip_addresses_unsorted = my_secrets.ip_addresses_unsorted
 
 def get_ip_int(ip):
@@ -34,5 +31,4 @@ def get_ip_int(ip):
         
 ip_addresses = sorted(ip_addresses_unsorted, key=lambda k: get_ip_int(k['IP']))
 
-# Call the function
 ping_ips(ip_addresses)
